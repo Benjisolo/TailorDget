@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#7A4BC7</color>
+    <color name="colorPrimaryDark">#5D2BBE</color>
+    <color name="colorAccent">#DA88F7</color>
+    <color name="tabTextColor">#FFFFFF</color>
+    <color name="tabIndicatorColor">#FD8B11</color>
+    <color name="colorDark">#FF000000</color>
+    <color name="hintColor">#88464946</color>
+</resources>
