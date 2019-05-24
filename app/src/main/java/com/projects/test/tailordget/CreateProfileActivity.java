@@ -38,13 +38,13 @@ public class CreateProfileActivity extends AppCompatActivity {
                     Date currentDate = new Date();
                     String name = profileNameEditText.getText().toString();
                     String sexe = profileSexeSpinner.getSelectedItem().toString();
+                    Toast.makeText(getApplicationContext(), "Profile saved successfully!", Toast.LENGTH_LONG);
 
                     final Profile newProfile = new Profile(name, sexe, currentDate);
                     AppExecutors.getInstance().diskIO().execute(new Runnable() {
                         @Override
                         public void run() {
                             mDB.profileDao().insertProfile(newProfile);
-                            Toast.makeText(getApplicationContext(), "Profile saved successfully!", Toast.LENGTH_LONG);
                             finish();
                         }
                     });

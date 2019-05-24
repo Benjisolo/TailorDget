@@ -13,6 +13,7 @@
     <string name="profileActivityTitle">Profiles</string>
     <string name="profile_name">Name</string>
     <string name="profile_sexe">Sex</string>
+    <string name="save">Save</string>
 
     <!--Arrays-->
     <array name="genderListItems">
