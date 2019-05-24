@@ -2,6 +2,7 @@ package com.projects.test.tailordget;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +25,9 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
     // Date formatter
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
 
-    public ProfileListAdapter(Context context) {
+    public ProfileListAdapter(Context context, ItemClickListener listener) {
         mContext = context;
-//        mItemClickListener = listener;
+        mItemClickListener = listener;
     }
 
     @Override
@@ -111,6 +112,7 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
 //                            listener.onItemClickListener(position);
 //                        }
 //                    }
+                    Log.d("ProfileViewHolder", "onClick: ");
                 }
             });
         }
