@@ -1,33 +1,42 @@
 package com.projects.test.tailordget;
 
 import android.content.Context;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 
-public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.ProfileViewHolder> {
+public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.ProfileViewHolder>
+        implements ActionModeAdapterCallback, ActionModeViewCallbacks, ListProfileActionModeViewCallbacks {
 
     // Constant for date format
     private static final String DATE_FORMAT = "dd/MM/yyy";
 
     // Member variable to handle item clicks
     private ItemClickListener mItemClickListener;
-    // Class variables for the List that holds task data and the Context
+    private ItemLongClickListener mItemLongClickListener;
     private List<Profile> mProfileList;
+    private ArrayList<Integer> selectedList;
+    private SparseBooleanArray selectedItemsIds;
     private Context mContext;
-    // Date formatter
     private SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_FORMAT, Locale.getDefault());
+    private ActionMode mActionMode;
 
-    public ProfileListAdapter(Context context, ItemClickListener listener) {
+    public ProfileListAdapter(Context context, ItemClickListener clickListener, ItemLongClickListener longClickListener) {
         mContext = context;
-        mItemClickListener = listener;
+        mItemClickListener = clickListener;
+        mItemLongClickListener = longClickListener;
+        // For item selection
+        selectedItemsIds = new SparseBooleanArray();
     }
 
     @Override
@@ -52,14 +61,7 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
         holder.profileSexeTextView.setText(sexe);
         holder.dateRecordTextView.setText(dateRecord);
 
-        // Programmatically set the text and color for the priority TextView
-//        String priorityString = "" + priority; // converts int to String
-//        holder.priorityView.setText(priorityString);
-//
-//        GradientDrawable priorityCircle = (GradientDrawable) holder.priorityView.getBackground();
-//        // Get the appropriate background color based on the priority
-//        int priorityColor = getPriorityColor(priority);
-//        priorityCircle.setColor(priorityColor);
+        holder.itemView.setActivated(selectedItemsIds.get(position));
     }
 
     @Override
@@ -70,6 +72,14 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
         return mProfileList.size();
     }
 
+    private Profile getItem(int index) {
+        return mProfileList.get(index);
+    }
+
+    private int getSelectedItemCount() {
+        return selectedList.size();
+    }
+
     /**
      * When data changes, this method updates the list of taskEntries
      * and notifies the adapter to use the new values on it
@@ -78,13 +88,63 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
         mProfileList = profileList;
         notifyDataSetChanged();
     }
+//<------------------------
+    @Override
+    public void toggleSelection(int position) {
+        if (selectedItemsIds.get(position)) {
+            selectedItemsIds.delete(position);
+        } else {
+            selectedItemsIds.put(position, true);
+        }
+        notifyItemChanged(position);
+    }
+
+    @Override
+    public void clearSelections() {
+        selectedItemsIds.clear();
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public int getSelectedCount() {
+        return selectedItemsIds.size();
+    }
+
+    @Override
+    public List<Profile> getSelectedItems() {
+        final List<Profile> selectedItemList = new LinkedList<>();
+        for (int i = 0; i < selectedItemsIds.size(); i++) {
+            selectedItemList.add(mProfileList.get(selectedItemsIds.keyAt(i)));
+        }
+        return selectedItemList;
+    }
+
+    @Override
+    public void onListItemSelect(int position) {
+
+    }
+
+    @Override
+    public void onDestroyActionMode() {
+
+    }
+
+    @Override
+    public void onDeleteActionClicked() {
+
+    }
+//--------------------------->
 
     public interface ItemClickListener {
         void onItemClickListener(int itemId);
     }
 
+    public interface ItemLongClickListener {
+        void onItemLongClickListener(int itemId);
+    }
+
     // Inner class for creating ViewHolders
-    class ProfileViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    class ProfileViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
 
         // Class variables for the Profile description and priority TextViews
         TextView profileNameTextView;
@@ -102,28 +162,19 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
             profileNameTextView = (TextView) itemView.findViewById(R.id.profileNameTextView);
             profileSexeTextView = (TextView) itemView.findViewById(R.id.profileSexe);
             dateRecordTextView = (TextView) itemView.findViewById(R.id.dateRecordProfileList);
-//            itemView.setOnClickListener(this);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-//                    if(listener != null) {
-//                        int position = getAdapterPosition();
-//                        if(position != RecyclerView.NO_POSITION) {
-//                            listener.onItemClickListener(position);
-//                        }
-//                    }
-                    Log.d("ProfileViewHolder", "onClick: ");
-                }
-            });
+            itemView.setOnClickListener(this);
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
         public void onClick(View view) {
             mItemClickListener.onItemClickListener(getAdapterPosition());
         }
-    }
 
-    public void setOnItemClickListener(ItemClickListener listener) {
-        mItemClickListener = listener;
+        @Override
+        public boolean onLongClick(View v) {
+            mItemLongClickListener.onItemLongClickListener(getAdapterPosition());
+            return true;
+        }
     }
 }

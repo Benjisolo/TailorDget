@@ -8,26 +8,29 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/profilesToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:elevation="0dp"
+        design:title="@string/profileActivityTitle"
+        design:titleTextColor="@color/tabTextColor" />
+
     <LinearLayout
         android:id="@+id/contentLinearLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:orientation="vertical"
+        android:background="@color/cardview_light_background"
         app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/profilesToolbar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:minHeight="?attr/actionBarSize"
-            android:theme="?attr/actionBarTheme"
-            android:elevation="5dp"
-            design:title="@string/profileActivityTitle"
-            design:titleTextColor="@color/tabTextColor" />
+        app:layout_constraintTop_toBottomOf="@+id/profilesToolbar">
 
         <android.support.design.widget.TabLayout
             android:id="@+id/profilesTabLayout"
