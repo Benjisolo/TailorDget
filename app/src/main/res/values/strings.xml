@@ -13,7 +13,9 @@
     <string name="profileActivityTitle">Profiles</string>
     <string name="profile_name">Name</string>
     <string name="profile_sexe">Sex</string>
-    <string name="save">Save</string>
+    <string name="item_share">Share</string>
+    <string name="item_delete">Delete</string>
+    <string name="cab_selected">%1$d selected</string>
 
     <!--Arrays-->
     <array name="genderListItems">

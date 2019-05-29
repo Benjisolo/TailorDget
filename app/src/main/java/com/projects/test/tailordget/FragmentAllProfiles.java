@@ -1,27 +1,18 @@
 package com.projects.test.tailordget;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -29,7 +20,9 @@ import java.util.List;
 
 import static android.support.v7.widget.DividerItemDecoration.VERTICAL;
 
-public class FragmentAllProfiles extends Fragment implements ProfileListAdapter.ItemClickListener {
+public class FragmentAllProfiles extends Fragment
+        implements ProfileListAdapter.ItemClickListener, ActionModeViewCallbacks,
+        ListProfileActionModeViewCallbacks, ProfileListAdapter.ItemLongClickListener {
 
     //    private static final String TAG = "MainActivity";
     private static final String TAG = MainActivity.class.getSimpleName();
@@ -37,6 +30,7 @@ public class FragmentAllProfiles extends Fragment implements ProfileListAdapter.
     private RecyclerView recyclerViewProfile;
     private ProfileListAdapter mAdapter;
     private FloatingActionButton newProfileActBtn;
+    private ActionMode mActionMode;
     // Create AppDatabase member variable for the Database
     private AppDatabase mDb;
     Date date = new Date();
@@ -61,7 +55,7 @@ public class FragmentAllProfiles extends Fragment implements ProfileListAdapter.
         recyclerViewProfile.setLayoutManager(new LinearLayoutManager(view.getContext()));
 
         // Initialize the adapter and attach it to the RecyclerView
-        mAdapter = new ProfileListAdapter(view.getContext(), this);
+        mAdapter = new ProfileListAdapter(view.getContext(), this, this);
         recyclerViewProfile.setAdapter(mAdapter);
 
         DividerItemDecoration decoration = new DividerItemDecoration(view.getContext(), VERTICAL);
@@ -87,6 +81,14 @@ public class FragmentAllProfiles extends Fragment implements ProfileListAdapter.
     @Override
     public void onItemClickListener(int itemPosition) {
         Log.d(TAG, "------------------------------- onItemClickListener: " + itemPosition + " clicked.");
+        // select the clicked item if cab menu is activated
+//        onListItemSelect(itemPosition);
+    }
+
+    @Override
+    public void onItemLongClickListener(int itemId) {
+        // Activates the cab menu and select the long cliked item
+        onListItemSelect(itemId);
     }
 
     @Override
@@ -104,5 +106,33 @@ public class FragmentAllProfiles extends Fragment implements ProfileListAdapter.
                 });
             }
         });
+    }
+
+//    This method activates the cab menu
+    @Override
+    public void onListItemSelect(int position) {
+        mAdapter.toggleSelection(position);
+        final boolean hasCheckedItems = mAdapter.getSelectedCount() > 0;
+        if (hasCheckedItems && mActionMode == null) {
+            // there are some selected items, start the actionMode
+            mActionMode = ((AppCompatActivity) getActivity()).startSupportActionMode(new ListProfileToolbarActionModeCallback(this, mAdapter));
+        } else if (!hasCheckedItems && mActionMode != null) {
+            // there no selected items, finish the actionMode
+            mActionMode.finish();
+        }
+        if (mActionMode != null) {
+            //set action mode title on item selection
+            mActionMode.setTitle(getString(R.string.cab_selected, mAdapter.getSelectedCount()));
+        }
+    }
+
+    @Override
+    public void onDestroyActionMode() {
+
+    }
+
+    @Override
+    public void onDeleteActionClicked() {
+
     }
 }
