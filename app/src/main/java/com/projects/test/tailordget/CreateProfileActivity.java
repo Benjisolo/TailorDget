@@ -33,7 +33,7 @@ public class CreateProfileActivity extends AppCompatActivity {
         createProfileToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
-                Toast.makeText(getApplicationContext(), "Profile saved successfully!", Toast.LENGTH_LONG);
+                Toast.makeText(getApplicationContext(), "Profile saved successfully!", Toast.LENGTH_LONG).show();
                 if(menuItem == createProfileToolbar.getMenu().getItem(0)) {
                     Date currentDate = new Date();
                     String name = profileNameEditText.getText().toString();
@@ -58,5 +58,6 @@ public class CreateProfileActivity extends AppCompatActivity {
                 finish();
             }
         });
+//        setSupportActionBar(createProfileToolbar);
     }
 }

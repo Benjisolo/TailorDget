@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -80,7 +81,6 @@ public class FragmentAllProfiles extends Fragment
 
     @Override
     public void onItemClickListener(int itemPosition) {
-        Log.d(TAG, "------------------------------- onItemClickListener: " + itemPosition + " clicked.");
         // select the clicked item if cab menu is activated
         if(mActionMode != null) {
             onListItemSelect(itemPosition);
@@ -131,11 +131,12 @@ public class FragmentAllProfiles extends Fragment
 
     @Override
     public void onDestroyActionMode() {
-
+        mActionMode = null;
     }
 
     @Override
     public void onDeleteActionClicked() {
-
+        Toast.makeText(getContext(), "Deleted", Toast.LENGTH_SHORT).show();
+        Log.d(TAG, "--------------------------- onDeleteActionClicked: deleted");
     }
 }
