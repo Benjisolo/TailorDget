@@ -88,7 +88,12 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
         mProfileList = profileList;
         notifyDataSetChanged();
     }
-//<------------------------
+
+    public List<Profile> getProfileList() {
+        return mProfileList;
+    }
+
+    //<------------------------
     @Override
     public void toggleSelection(int position) {
         if (selectedItemsIds.get(position)) {

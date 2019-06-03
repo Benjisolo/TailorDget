@@ -9,7 +9,6 @@ import android.support.v7.view.ActionMode;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -85,6 +84,12 @@ public class FragmentAllProfiles extends Fragment
         if(mActionMode != null) {
             onListItemSelect(itemPosition);
         }
+        else {
+            Intent openDetailView = new Intent(getContext(), ProfileDetailActivity.class);
+            String profileName = mAdapter.getProfileList().get(itemPosition).getName();
+            openDetailView.putExtra("profileName", profileName);
+            startActivity(openDetailView);
+        }
     }
 
     @Override
@@ -96,6 +101,10 @@ public class FragmentAllProfiles extends Fragment
     @Override
     public void onResume() {
         super.onResume();
+        retrieveProfiles();
+    }
+
+    public void retrieveProfiles() {
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
@@ -136,7 +145,14 @@ public class FragmentAllProfiles extends Fragment
 
     @Override
     public void onDeleteActionClicked() {
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                for(Profile p : mAdapter.getSelectedItems())
+                    mDb.profileDao().deleteProfile(p);
+            }
+        });
+        retrieveProfiles();
         Toast.makeText(getContext(), "Deleted", Toast.LENGTH_SHORT).show();
-        Log.d(TAG, "--------------------------- onDeleteActionClicked: deleted");
     }
 }

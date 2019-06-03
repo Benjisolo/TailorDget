@@ -1,21 +1,24 @@
 <resources>
     <!--Strings-->
     <string name="app_name">TailorDget</string>
-    <string name="home">Home</string>
-    <string name="profiles">Profiles</string>
-    <string name="task">Task</string>
-    <string name="settings">Settings</string>
+    <string name="home_label">Home</string>
+    <string name="profiles_label">Profiles</string>
+    <string name="task_label">Task</string>
+    <string name="settings_label">Settings</string>
     <string name="all_profiles_list">All Profiles List</string>
     <string name="favorites_profiles_list">Favorites Profiles List</string>
     <string name="all_profile_title_pane" translatable="false">All</string>
     <string name="favorite_profile_title_pane">Favorites</string>
     <string name="new_profile_view_title">New Profile</string>
     <string name="profileActivityTitle">Profiles</string>
-    <string name="profile_name">Name</string>
-    <string name="profile_sexe">Sex</string>
+    <string name="profile_name_label">Name</string>
+    <string name="profile_sexe_label">Sex</string>
+    <string name="profile_name">Profile Name</string>
     <string name="item_share">Share</string>
     <string name="item_delete">Delete</string>
     <string name="cab_selected">%1$d selected</string>
+    <string name="favorite">Favorite</string>
+    <string name="edit">Edit</string>
 
     <!--Arrays-->
     <array name="genderListItems">

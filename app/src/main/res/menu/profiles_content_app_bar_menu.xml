@@ -8,6 +8,11 @@
         android:title="@string/item_share"
         app:showAsAction="always" />
     <item
+        android:id="@+id/menuFavorite"
+        android:title="@string/favorite"
+        android:icon="@drawable/ic_favorite"
+        app:showAsAction="always"/>
+    <item
         android:id="@+id/menuDelete"
         android:icon="@drawable/ic_delete"
         android:title="@string/item_delete"

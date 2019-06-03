@@ -11,6 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <!--Main Activity-->
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -18,7 +20,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".CreateProfileActivity" android:theme="@style/AppThemeNoActionBar"/>
+
+        <!--Create Profile Activity-->
+        <activity
+            android:name=".CreateProfileActivity"
+            android:theme="@style/AppThemeNoActionBar" />
+
+        <!--Profile Details Activity-->
+        <activity android:name=".ProfileDetailActivity"
+            android:theme="@style/AppThemeNoActionBar"/>
     </application>
 
 </manifest>
