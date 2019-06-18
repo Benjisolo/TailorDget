@@ -24,7 +24,7 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
     // Member variable to handle item clicks
     private ItemClickListener mItemClickListener;
     private ItemLongClickListener mItemLongClickListener;
-    private List<Profile> mProfileList;
+    private static List<Profile> mProfileList;
     private ArrayList<Integer> selectedList;
     private SparseBooleanArray selectedItemsIds;
     private Context mContext;

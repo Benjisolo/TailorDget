@@ -1,4 +1,11 @@
 <resources>
+
+    <!--Arrays-->
+    <array name="genderListItems">
+        <item>Female</item>
+        <item>Male</item>
+    </array>
+
     <!--Strings-->
     <string name="app_name">TailorDget</string>
     <string name="home_label">Home</string>
@@ -7,22 +14,49 @@
     <string name="settings_label">Settings</string>
     <string name="all_profiles_list">All Profiles List</string>
     <string name="favorites_profiles_list">Favorites Profiles List</string>
-    <string name="all_profile_title_pane" translatable="false">All</string>
+    <string name="all_profile_title_pane">All</string>
     <string name="favorite_profile_title_pane">Favorites</string>
     <string name="new_profile_view_title">New Profile</string>
     <string name="profileActivityTitle">Profiles</string>
-    <string name="profile_name_label">Name</string>
-    <string name="profile_sexe_label">Sex</string>
-    <string name="profile_name">Profile Name</string>
+    <string name="name_label">Name</string>
+    <string name="sex_label">Sex</string>
+    <string name="profile_name_label">Profile Name</string>
     <string name="item_share">Share</string>
     <string name="item_delete">Delete</string>
     <string name="cab_selected">%1$d selected</string>
     <string name="favorite">Favorite</string>
     <string name="edit">Edit</string>
-
-    <!--Arrays-->
-    <array name="genderListItems">
-        <item>F</item>
-        <item>M</item>
-    </array>
+    <string name="mensuration_title">Mensuration</string>
+    <string name="commands_title">Commands</string>
+    <string name="oversee_title">Oversee</string>
+    <string name="label_neck">Neck</string>
+    <string name="label_chest">Chest</string>
+    <string name="label_waist">Waist</string>
+    <string name="label_hip">Hip</string>
+    <string name="label_seat">Seat</string>
+    <string name="label_shirt_length">Shirt Length</string>
+    <string name="label_half_shoulder">Half Shoulder</string>
+    <string name="label_shoulder_width">Shoulder Width</string>
+    <string name="label_arm_length">Arm Length</string>
+    <string name="label_biceps">Biceps</string>
+    <string name="label_wrist">Wrist</string>
+    <string name="label_inseam">Inseam</string>
+    <string name="label_coat_sleeve_length">Coat Sleeve Length</string>
+    <string name="label_jacket_length">Jacket Length</string>
+    <string name="label_thigh">Thigh</string>
+    <string name="label_above_knee">Above Knee</string>
+    <string name="label_below_knee">Below Knee</string>
+    <string name="label_calf">Calf</string>
+    <string name="label_ankle">Ankle</string>
+    <string name="label_crotch_to_knee">Crotch To Knee</string>
+    <string name="label_knee_to_calf">Knee To Calf</string>
+    <string name="label_calf_to_ankle">Calf To Ankle</string>
+    <string name="label_waist_to_ankle">Waist To Ankle</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_test_bottom_nav">testBottomNav</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="phone_label">Phone</string>
+    <string name="personal_label">Personal</string>
 </resources>

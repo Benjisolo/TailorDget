@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/mennuMensuration"
+        android:title="@string/mensuration_title"
+        android:icon="@drawable/ic_ruler"/>
+    <item
+        android:id="@+id/menuCommands"
+        android:title="@string/commands_title"
+        android:icon="@drawable/ic_dollar"/>
+    <item
+        android:id="@+id/menuOversee"
+        android:title="@string/oversee_title"
+        android:icon="@drawable/ic_chart"/>
+
+</menu>

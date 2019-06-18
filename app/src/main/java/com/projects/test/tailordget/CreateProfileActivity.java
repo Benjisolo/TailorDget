@@ -39,7 +39,7 @@ public class CreateProfileActivity extends AppCompatActivity {
                     String name = profileNameEditText.getText().toString();
                     String sexe = profileSexeSpinner.getSelectedItem().toString();
 
-                    final Profile newProfile = new Profile(name, sexe, currentDate);
+                    final Profile newProfile = new Profile(name, sexe.substring(0, 1), currentDate);
                     AppExecutors.getInstance().diskIO().execute(new Runnable() {
                         @Override
                         public void run() {

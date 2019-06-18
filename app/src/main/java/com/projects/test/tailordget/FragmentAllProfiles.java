@@ -35,6 +35,8 @@ public class FragmentAllProfiles extends Fragment
     private AppDatabase mDb;
     Date date = new Date();
 
+    public static Profile displayedProfile;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.all_profiles_fragment, container, false);
@@ -87,7 +89,7 @@ public class FragmentAllProfiles extends Fragment
         else {
             Intent openDetailView = new Intent(getContext(), ProfileDetailActivity.class);
             String profileName = mAdapter.getProfileList().get(itemPosition).getName();
-            openDetailView.putExtra("profileName", profileName);
+            displayedProfile = mAdapter.getProfileList().get(itemPosition);
             startActivity(openDetailView);
         }
     }

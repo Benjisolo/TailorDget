@@ -13,65 +13,691 @@
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"
         android:backgroundTint="@color/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
         android:elevation="8dp"
+        android:minHeight="?attr/actionBarSize"
         app:navigationIcon="@drawable/ic_arrow_back"
         app:title="@string/new_profile_view_title"
         app:titleTextColor="#FFFFFF" />
 
-    <ImageView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:background="@color/colorAccent"
-        app:srcCompat="@drawable/ic_profile"
-        tools:ignore="VectorDrawableCompat" />
+        android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="match_parent"
-            app:srcCompat="@drawable/ic_profile_gray" />
-
-        <EditText
-            android:id="@+id/profileNameEditText"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginRight="50dp"
-            android:gravity="start"
-            android:hint="@string/profile_name_label" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingTop="10dp">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="match_parent" />
-
-        <TextView
-            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/profile_sexe_label"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:orientation="vertical"
+            android:paddingBottom="30dp">
 
-        <Spinner
-            android:id="@+id/profileSexeSpinner"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:gravity="start"
-            android:hint="@string/profile_sexe_label"
-            android:entries="@array/genderListItems" />
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:background="@color/colorAccent"
+                app:srcCompat="@drawable/ic_profile"
+                tools:ignore="VectorDrawableCompat" />
 
-    </LinearLayout>
+            <!-- Card Personal -->
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                app:contentPaddingBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@string/personal_label"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal"
+                        android:padding="0dp"
+                        android:paddingTop="10dp">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            app:srcCompat="@drawable/ic_profile_gray" />
+
+                        <EditText
+                            android:id="@+id/profileNameEditText"
+                            style="@style/Widget.AppCompat.EditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:gravity="start"
+                            android:hint="@string/name_label" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:orientation="horizontal"
+                        android:padding="0dp"
+                        android:paddingTop="10dp">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent"
+                            app:srcCompat="@drawable/ic_phone" />
+
+                        <EditText
+                            android:id="@+id/profilePhoneEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/phone_label"
+                            android:inputType="phone" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_marginBottom="5dp"
+                        android:orientation="horizontal"
+                        android:paddingLeft="50dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/sex_label"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                        <Spinner
+                            android:id="@+id/profileSexeSpinner"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:entries="@array/genderListItems"
+                            android:gravity="start"
+                            android:hint="@string/sex_label" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+
+            <!-- Card Mensuration -->
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="6dp"
+                app:contentPaddingBottom="10dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="10dp"
+                        android:text="@string/mensuration_title"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="18sp" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="?android:attr/listDivider" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/neckEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_neck"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/chestEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_chest"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/waistEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_waist"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/hipEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_hip"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/seatEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_seat"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/shirtLengthEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_shirt_length"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/halfShoulderEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_half_shoulder"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/shoulderWidthEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_shoulder_width"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/armLengthEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_arm_length"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/bicepsEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_biceps"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/wristEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_wrist"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/inseamEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_inseam"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/coatSleeveLengthEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_coat_sleeve_length"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/jacketLengthEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_jacket_length"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/thighEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_thigh"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/aboveKneeEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_above_knee"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/belowKneeEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_below_knee"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/calfEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_calf"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/ankleEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_ankle"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/crotchToKneeEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_crotch_to_knee"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/kneeToCalfEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_knee_to_calf"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/calfToAnkleEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_calf_to_ankle"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="8dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="50dp"
+                            android:layout_height="match_parent" />
+
+                        <EditText
+                            android:id="@+id/waistToAnkleEditText"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginRight="50dp"
+                            android:layout_weight="1"
+                            android:ems="10"
+                            android:gravity="start"
+                            android:hint="@string/label_waist_to_ankle"
+                            android:inputType="numberDecimal" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </android.support.v7.widget.CardView>
+        </LinearLayout>
+    </ScrollView>
 
 </LinearLayout>

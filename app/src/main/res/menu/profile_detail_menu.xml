@@ -5,5 +5,24 @@
         android:id="@+id/menuEdit"
         android:title="@string/edit"
         android:icon="@drawable/ic_edit"
-        app:showAsAction="always"/>
+        app:showAsAction="never"
+        android:orderInCategory="1"/>
+    <item
+        android:id="@+id/menuShare"
+        android:title="@string/item_share"
+        android:icon="@drawable/ic_share"
+        app:showAsAction="never"
+        android:orderInCategory="2"/>
+    <item
+        android:id="@+id/menuFavorite"
+        android:title="@string/favorite"
+        android:icon="@drawable/ic_favorite"
+        app:showAsAction="never"
+        android:orderInCategory="3"/>
+    <item
+        android:id="@+id/menuDelete"
+        android:title="@string/item_delete"
+        android:icon="@drawable/ic_profile_gray"
+        app:showAsAction="never"
+        android:orderInCategory="4"/>
 </menu>
