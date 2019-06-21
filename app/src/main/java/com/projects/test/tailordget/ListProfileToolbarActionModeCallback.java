@@ -27,13 +27,20 @@ class ListProfileToolbarActionModeCallback implements ActionMode.Callback {
 
     @Override
     public boolean onActionItemClicked(ActionMode actionMode, MenuItem menuItem) {
+        boolean flag = false;
         switch (menuItem.getItemId()) {
-            case R.id.menuDelete:
+            case R.id.menuDelete: {
                 actionModeViewCallbacks.onDeleteActionClicked();
                 actionMode.finish();
-                return true;
+                flag = true;
+            }break;
+            case R.id.menuFavorite: {
+                actionModeViewCallbacks.onFavoriteActionClicked();
+                actionMode.finish();
+                flag = true;
+            }break;
         }
-        return false;
+        return flag;
     }
 
     @Override

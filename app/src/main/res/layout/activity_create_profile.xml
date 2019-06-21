@@ -76,7 +76,7 @@
                             app:srcCompat="@drawable/ic_profile_gray" />
 
                         <EditText
-                            android:id="@+id/profileNameEditText"
+                            android:id="@+id/nameEditText"
                             style="@style/Widget.AppCompat.EditText"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
@@ -100,7 +100,7 @@
                             app:srcCompat="@drawable/ic_phone" />
 
                         <EditText
-                            android:id="@+id/profilePhoneEditText"
+                            android:id="@+id/phoneEditText"
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_marginRight="50dp"
@@ -127,7 +127,7 @@
                             android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
 
                         <Spinner
-                            android:id="@+id/profileSexeSpinner"
+                            android:id="@+id/sexSpinner"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:layout_marginLeft="10dp"

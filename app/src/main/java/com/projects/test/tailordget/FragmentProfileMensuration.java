@@ -35,13 +35,6 @@ public class FragmentProfileMensuration extends Fragment {
         populateMensurationLabelList();
         populateMensurationValuesList();
 
-        for(int i=0; i<mensurationValuesList.size(); i++) {
-            if(i%2==0)
-                addCardView(linearLeftWrapper, mensurationLabelList.get(i), mensurationValuesList.get(i));
-            else
-                addCardView(linearRightWrapper, mensurationLabelList.get(i), mensurationValuesList.get(i));
-        }
-
         return view;
     }
 
@@ -49,6 +42,24 @@ public class FragmentProfileMensuration extends Fragment {
     public void onResume() {
         super.onResume();
 
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                getActivity().runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        for(int i=0; i<mensurationValuesList.size(); i++) {
+                            LinearLayout wrapper;
+
+                            if(i%2==0) wrapper = linearLeftWrapper;
+                            else wrapper = linearRightWrapper;
+
+                            addCardView(wrapper, mensurationLabelList.get(i), mensurationValuesList.get(i));
+                        }
+                    }
+                });
+            }
+        });
     }
 
     public void addCardView(LinearLayout wrapper, String label, String value) {

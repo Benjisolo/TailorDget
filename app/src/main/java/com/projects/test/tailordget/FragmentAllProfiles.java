@@ -88,7 +88,6 @@ public class FragmentAllProfiles extends Fragment
         }
         else {
             Intent openDetailView = new Intent(getContext(), ProfileDetailActivity.class);
-            String profileName = mAdapter.getProfileList().get(itemPosition).getName();
             displayedProfile = mAdapter.getProfileList().get(itemPosition);
             startActivity(openDetailView);
         }
@@ -115,6 +114,12 @@ public class FragmentAllProfiles extends Fragment
                     @Override
                     public void run() {
                         mAdapter.setProfiles(profileList);
+
+                        FragmentFavoritesProfiles.getFavoriteProfileList().clear();
+                        for(Profile p : profileList) {
+                            if(p.isFavorite())
+                                FragmentFavoritesProfiles.getFavoriteProfileList().add(p);
+                        }
                     }
                 });
             }
@@ -156,5 +161,20 @@ public class FragmentAllProfiles extends Fragment
         });
         retrieveProfiles();
         Toast.makeText(getContext(), "Deleted", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onFavoriteActionClicked() {
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                for(Profile p : mAdapter.getSelectedItems()) {
+                    p.setFavorite(true);
+                    mDb.profileDao().updateProfile(p);
+                }
+            }
+        });
+        retrieveProfiles();
+        Toast.makeText(getContext(), getString(R.string.added_to_favorite_message), Toast.LENGTH_SHORT).show();
     }
 }

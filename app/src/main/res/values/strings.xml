@@ -59,4 +59,7 @@
     <string name="title_notifications">Notifications</string>
     <string name="phone_label">Phone</string>
     <string name="personal_label">Personal</string>
+    <string name="add_favorite_label">Add Favorite</string>
+    <string name="added_to_favorite_message">Added to Favorites</string>
+    <string name="remove_label">Remove</string>
 </resources>

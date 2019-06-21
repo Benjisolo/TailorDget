@@ -14,6 +14,7 @@ public class Profile {
     private int id;
     private String name;
     private String sexe;
+    private String phone;
     private float neck;
     private float chest;
     private float waist;
@@ -37,8 +38,12 @@ public class Profile {
     private float kneeToCalf;
     private float calfToAnkle;
     private float waistToAnkle;
+    private boolean favorite;
     @ColumnInfo(name = "date_record")
     private Date dateRecord;
+
+    public Profile() {
+    }
 
     public Profile(int id, String name, String sexe, Date dateRecord) {
         this.id = id;
@@ -76,6 +81,14 @@ public class Profile {
 
     public void setSexe(String sexe) {
         this.sexe = sexe;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public Date getDateRecord() {
@@ -268,6 +281,14 @@ public class Profile {
 
     public void setWaistToAnkle(float waistToAnkle) {
         this.waistToAnkle = waistToAnkle;
+    }
+
+    public boolean isFavorite() {
+        return favorite;
+    }
+
+    public void setFavorite(boolean favorite) {
+        this.favorite = favorite;
     }
 
     @Override

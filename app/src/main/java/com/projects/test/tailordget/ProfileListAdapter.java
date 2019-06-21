@@ -89,7 +89,7 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
         notifyDataSetChanged();
     }
 
-    public List<Profile> getProfileList() {
+    public static List<Profile> getProfileList() {
         return mProfileList;
     }
 
@@ -136,6 +136,11 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
 
     @Override
     public void onDeleteActionClicked() {
+
+    }
+
+    @Override
+    public void onFavoriteActionClicked() {
 
     }
 //--------------------------->
