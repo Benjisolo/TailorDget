@@ -42,6 +42,7 @@ public class Profile {
     @ColumnInfo(name = "date_record")
     private Date dateRecord;
 
+    @Ignore
     public Profile() {
     }
 

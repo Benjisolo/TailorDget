@@ -46,6 +46,7 @@ public class FragmentAllProfiles extends Fragment
             @Override
             public void onClick(View v) {
                 Intent newProfileView = new Intent(view.getContext(), CreateProfileActivity.class);
+                newProfileView.putExtra(CreateProfileActivity.EDIT_MODE, false);
                 startActivity(newProfileView);
             }
         });
@@ -88,8 +89,9 @@ public class FragmentAllProfiles extends Fragment
         }
         else {
             Intent openDetailView = new Intent(getContext(), ProfileDetailActivity.class);
-            displayedProfile = mAdapter.getProfileList().get(itemPosition);
+            ProfileDetailActivity.mProfile = mAdapter.getProfileList().get(itemPosition);
             startActivity(openDetailView);
+//            displayedProfile = mAdapter.getProfileList().get(itemPosition);
         }
     }
 
@@ -174,7 +176,7 @@ public class FragmentAllProfiles extends Fragment
                 }
             }
         });
-        retrieveProfiles();
+//        retrieveProfiles();
         Toast.makeText(getContext(), getString(R.string.added_to_favorite_message), Toast.LENGTH_SHORT).show();
     }
 }

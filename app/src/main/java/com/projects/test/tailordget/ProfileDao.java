@@ -12,7 +12,7 @@ import java.util.List;
 @Dao
 public interface ProfileDao {
 
-    @Query("SELECT * FROM profile ORDER BY name")
+    @Query("SELECT * FROM profile ORDER BY id DESC")
     List<Profile> loadAllProfiles();
 
     @Insert
@@ -23,4 +23,7 @@ public interface ProfileDao {
 
     @Delete
     void deleteProfile(Profile profile);
+
+    @Query("SELECT * FROM profile WHERE id = :id")
+    Profile loadProfileById(int id);
 }

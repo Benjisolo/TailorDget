@@ -50,21 +50,25 @@ public class FragmentFavoritesProfiles extends Fragment {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        linearLeftWrapper.removeAllViews();
-                        linearRightWrapper.removeAllViews();
-                        if(favoriteProfileList.size() > 0) {
-                            for(int i=0; i<favoriteProfileList.size(); i++) {
-                                LinearLayout wrapper;
-
-                                if(i%2==0) wrapper = linearLeftWrapper;
-                                else wrapper = linearRightWrapper;
-                                addFavoriteView(wrapper, favoriteProfileList.get(i).getName(), favoriteProfileList.get(i).getPhone());
-                            }
-                        }
+                        displayViews();
                     }
                 });
             }
         });
+    }
+
+    public void displayViews() {
+        linearLeftWrapper.removeAllViews();
+        linearRightWrapper.removeAllViews();
+        if(favoriteProfileList.size() > 0) {
+            for(int i=0; i<favoriteProfileList.size(); i++) {
+                LinearLayout wrapper;
+
+                if(i%2==0) wrapper = linearLeftWrapper;
+                else wrapper = linearRightWrapper;
+                addFavoriteView(wrapper, favoriteProfileList.get(i).getName(), favoriteProfileList.get(i).getPhone());
+            }
+        }
     }
 
     public void addFavoriteView(final LinearLayout wrapper, final String name, String phone) {
@@ -80,7 +84,7 @@ public class FragmentFavoritesProfiles extends Fragment {
                         AppExecutors.getInstance().diskIO().execute(new Runnable() {
                             @Override
                             public void run() {
-                                Profile profile = new Profile();
+                                Profile profile = null;
                                 for (Profile p : favoriteProfileList) {
                                     if(p.getName().equals(name))
                                         profile = p;

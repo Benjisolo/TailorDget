@@ -32,15 +32,15 @@ public class FragmentProfileMensuration extends Fragment {
         mensurationLabelList = new ArrayList<>();
         mensurationValuesList = new ArrayList<>();
 
-        populateMensurationLabelList();
-        populateMensurationValuesList();
-
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
+
+        populateMensurationLabelList();
+        populateMensurationValuesList();
 
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
@@ -70,29 +70,29 @@ public class FragmentProfileMensuration extends Fragment {
     }
 
     public void populateMensurationValuesList() {
-        String neck = String.valueOf(FragmentAllProfiles.displayedProfile.getNeck());
-        String chest = String.valueOf(FragmentAllProfiles.displayedProfile.getChest());
-        String waist = String.valueOf(FragmentAllProfiles.displayedProfile.getWaist());
-        String hip = String.valueOf(FragmentAllProfiles.displayedProfile.getHip());
-        String seat = String.valueOf(FragmentAllProfiles.displayedProfile.getSeat());
-        String shirtLength = String.valueOf(FragmentAllProfiles.displayedProfile.getShirtLength());
-        String halfShoulder = String.valueOf(FragmentAllProfiles.displayedProfile.getHalfShoulder());
-        String shoulderWidth = String.valueOf(FragmentAllProfiles.displayedProfile.getShoulderWidth());
-        String armLength = String.valueOf(FragmentAllProfiles.displayedProfile.getArmLength());
-        String biceps = String.valueOf(FragmentAllProfiles.displayedProfile.getBiceps());
-        String wrist = String.valueOf(FragmentAllProfiles.displayedProfile.getWrist());
-        String inseam = String.valueOf(FragmentAllProfiles.displayedProfile.getInseam());
-        String coatSleeveLength = String.valueOf(FragmentAllProfiles.displayedProfile.getCoatSleeveLength());
-        String jacketLength = String.valueOf(FragmentAllProfiles.displayedProfile.getJacketLength());
-        String thigh = String.valueOf(FragmentAllProfiles.displayedProfile.getThigh());
-        String aboveKnee = String.valueOf(FragmentAllProfiles.displayedProfile.getAboveKnee());
-        String belowKnee = String.valueOf(FragmentAllProfiles.displayedProfile.getBelowKnee());
-        String calf = String.valueOf(FragmentAllProfiles.displayedProfile.getCalf());
-        String ankle = String.valueOf(FragmentAllProfiles.displayedProfile.getAnkle());
-        String crotchToKnee = String.valueOf(FragmentAllProfiles.displayedProfile.getCrotchToKnee());
-        String kneeToCalf = String.valueOf(FragmentAllProfiles.displayedProfile.getKneeToCalf());
-        String calfToAnkle = String.valueOf(FragmentAllProfiles.displayedProfile.getCalfToAnkle());
-        String waistToAnkle = String.valueOf(FragmentAllProfiles.displayedProfile.getWaistToAnkle());
+        String neck = String.valueOf(ProfileDetailActivity.mProfile.getNeck());
+        String chest = String.valueOf(ProfileDetailActivity.mProfile.getChest());
+        String waist = String.valueOf(ProfileDetailActivity.mProfile.getWaist());
+        String hip = String.valueOf(ProfileDetailActivity.mProfile.getHip());
+        String seat = String.valueOf(ProfileDetailActivity.mProfile.getSeat());
+        String shirtLength = String.valueOf(ProfileDetailActivity.mProfile.getShirtLength());
+        String halfShoulder = String.valueOf(ProfileDetailActivity.mProfile.getHalfShoulder());
+        String shoulderWidth = String.valueOf(ProfileDetailActivity.mProfile.getShoulderWidth());
+        String armLength = String.valueOf(ProfileDetailActivity.mProfile.getArmLength());
+        String biceps = String.valueOf(ProfileDetailActivity.mProfile.getBiceps());
+        String wrist = String.valueOf(ProfileDetailActivity.mProfile.getWrist());
+        String inseam = String.valueOf(ProfileDetailActivity.mProfile.getInseam());
+        String coatSleeveLength = String.valueOf(ProfileDetailActivity.mProfile.getCoatSleeveLength());
+        String jacketLength = String.valueOf(ProfileDetailActivity.mProfile.getJacketLength());
+        String thigh = String.valueOf(ProfileDetailActivity.mProfile.getThigh());
+        String aboveKnee = String.valueOf(ProfileDetailActivity.mProfile.getAboveKnee());
+        String belowKnee = String.valueOf(ProfileDetailActivity.mProfile.getBelowKnee());
+        String calf = String.valueOf(ProfileDetailActivity.mProfile.getCalf());
+        String ankle = String.valueOf(ProfileDetailActivity.mProfile.getAnkle());
+        String crotchToKnee = String.valueOf(ProfileDetailActivity.mProfile.getCrotchToKnee());
+        String kneeToCalf = String.valueOf(ProfileDetailActivity.mProfile.getKneeToCalf());
+        String calfToAnkle = String.valueOf(ProfileDetailActivity.mProfile.getCalfToAnkle());
+        String waistToAnkle = String.valueOf(ProfileDetailActivity.mProfile.getWaistToAnkle());
         mensurationValuesList.add(neck);
         mensurationValuesList.add(chest);
         mensurationValuesList.add(waist);
