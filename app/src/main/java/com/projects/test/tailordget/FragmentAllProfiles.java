@@ -28,13 +28,13 @@ public class FragmentAllProfiles extends Fragment
     private static final String TAG = MainActivity.class.getSimpleName();
     // Member variables for the adapter and RecyclerView
     private RecyclerView recyclerViewProfile;
-    private ProfileListAdapter mAdapter;
     private FloatingActionButton newProfileActBtn;
     private ActionMode mActionMode;
     // Create AppDatabase member variable for the Database
     private AppDatabase mDb;
     Date date = new Date();
 
+    public static ProfileListAdapter mAdapter;
     public static Profile displayedProfile;
 
     @Override
@@ -66,6 +66,8 @@ public class FragmentAllProfiles extends Fragment
 
         // COMPLETED (2) Initialize member variable for the data base
         mDb = AppDatabase.getInstance(view.getContext());
+
+        retrieveProfiles();
 
         return view;
     }
@@ -116,19 +118,22 @@ public class FragmentAllProfiles extends Fragment
                     @Override
                     public void run() {
                         mAdapter.setProfiles(profileList);
-
-                        FragmentFavoritesProfiles.getFavoriteProfileList().clear();
-                        for(Profile p : profileList) {
-                            if(p.isFavorite())
-                                FragmentFavoritesProfiles.getFavoriteProfileList().add(p);
-                        }
+                        updateFavoriteProfileView(profileList);
                     }
                 });
             }
         });
     }
 
-//    This method activates the cab menu
+    private void updateFavoriteProfileView(List<Profile> profileList) {
+        FragmentFavoritesProfiles.getFavoriteProfileList().clear();
+        for(Profile p : profileList) {
+            if(p.isFavorite())
+                FragmentFavoritesProfiles.getFavoriteProfileList().add(p);
+        }
+    }
+
+    //    This method activates the cab menu
     @Override
     public void onListItemSelect(int position) {
         mAdapter.toggleSelection(position);
@@ -176,7 +181,12 @@ public class FragmentAllProfiles extends Fragment
                 }
             }
         });
-//        retrieveProfiles();
+//        getActivity().runOnUiThread(new Runnable() {
+//            @Override
+//            public void run() {
+//                retrieveProfiles();
+//            }
+//        });
         Toast.makeText(getContext(), getString(R.string.added_to_favorite_message), Toast.LENGTH_SHORT).show();
     }
 }

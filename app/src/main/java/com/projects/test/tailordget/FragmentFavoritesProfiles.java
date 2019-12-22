@@ -34,6 +34,7 @@ public class FragmentFavoritesProfiles extends Fragment {
         linearLeftWrapper = (LinearLayout) view.findViewById(R.id.favoriteLinearLeft);
         linearRightWrapper = (LinearLayout) view.findViewById(R.id.favoriteLinearRight);
 
+        displayViews();
         return view;
     }
 
@@ -44,31 +45,31 @@ public class FragmentFavoritesProfiles extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+        displayViews();
+    }
+
+    public void displayViews() {
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        displayViews();
+                        linearLeftWrapper.removeAllViews();
+                        linearRightWrapper.removeAllViews();
+                        if(favoriteProfileList.size() > 0) {
+                            for(int i=0; i<favoriteProfileList.size(); i++) {
+                                LinearLayout wrapper;
+
+                                if(i%2==0) wrapper = linearLeftWrapper;
+                                else wrapper = linearRightWrapper;
+                                addFavoriteView(wrapper, favoriteProfileList.get(i).getName(), favoriteProfileList.get(i).getPhone());
+                            }
+                        }
                     }
                 });
             }
         });
-    }
-
-    public void displayViews() {
-        linearLeftWrapper.removeAllViews();
-        linearRightWrapper.removeAllViews();
-        if(favoriteProfileList.size() > 0) {
-            for(int i=0; i<favoriteProfileList.size(); i++) {
-                LinearLayout wrapper;
-
-                if(i%2==0) wrapper = linearLeftWrapper;
-                else wrapper = linearRightWrapper;
-                addFavoriteView(wrapper, favoriteProfileList.get(i).getName(), favoriteProfileList.get(i).getPhone());
-            }
-        }
     }
 
     public void addFavoriteView(final LinearLayout wrapper, final String name, String phone) {
@@ -81,25 +82,7 @@ public class FragmentFavoritesProfiles extends Fragment {
             public boolean onMenuItemClick(MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.removeFavoriteItem: {
-                        AppExecutors.getInstance().diskIO().execute(new Runnable() {
-                            @Override
-                            public void run() {
-                                Profile profile = null;
-                                for (Profile p : favoriteProfileList) {
-                                    if(p.getName().equals(name))
-                                        profile = p;
-                                }
-                                profile.setFavorite(false);
-                                mDb.profileDao().updateProfile(profile);
-
-                                getActivity().runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-
-                                    }
-                                });
-                            }
-                        });
+                        removeFavoriteProfile(name);
                         wrapper.removeView(v);
                     }
                 }
@@ -110,5 +93,20 @@ public class FragmentFavoritesProfiles extends Fragment {
         ((TextView) v.findViewById(R.id.favoriteNameTextView)).setText(name);
         ((TextView) v.findViewById(R.id.favoritePhoneTextView)).setText(phone);
         wrapper.addView(v, new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+    }
+
+    private void removeFavoriteProfile(final String name) {
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                Profile profile = null;
+                for (Profile p : favoriteProfileList) {
+                    if(p.getName().equals(name))
+                        profile = p;
+                }
+                profile.setFavorite(false);
+                mDb.profileDao().updateProfile(profile);
+            }
+        });
     }
 }

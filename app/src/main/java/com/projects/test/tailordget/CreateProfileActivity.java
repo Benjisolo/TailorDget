@@ -1,5 +1,6 @@
 package com.projects.test.tailordget;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -9,11 +10,13 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class CreateProfileActivity extends AppCompatActivity {
 
     public static final String EDIT_MODE = "editMode";
+    private static final String LOG_TAG = CreateProfileActivity.class.getSimpleName();
 
     private AppDatabase mDB;
     private Toolbar createProfileToolbar;
@@ -24,6 +27,8 @@ public class CreateProfileActivity extends AppCompatActivity {
             aboveKneeEditText, belowKneeEditText, calfEditText, ankleEditText, crotchToKneeEditText,
             kneeToCalfEditText, calfToAnkleEditText, waistToAnkleEditText;
     private Spinner sexSpinner;
+
+    private Profile targetProfile = ProfileDetailActivity.mProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,40 +51,12 @@ public class CreateProfileActivity extends AppCompatActivity {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
                 if(menuItem == createProfileToolbar.getMenu().getItem(0)) {
-                    final Profile newProfile = new Profile();
-                    newProfile.setName(nameEditText.getText().toString());
-                    newProfile.setSexe(sexSpinner.getSelectedItem().toString().substring(0, 1));
-                    newProfile.setPhone(phoneEditText.getText().toString());
-                    newProfile.setNeck(checkMensurationEntry(neckEditText.getText().toString()));
-                    newProfile.setChest(checkMensurationEntry(chestEditText.getText().toString()));
-                    newProfile.setWaist(checkMensurationEntry(waistEditText.getText().toString()));
-                    newProfile.setHip(checkMensurationEntry(hipEditText.getText().toString()));
-                    newProfile.setSeat(checkMensurationEntry(seatEditText.getText().toString()));
-                    newProfile.setShirtLength(checkMensurationEntry(shirtLengthEditText.getText().toString()));
-                    newProfile.setHalfShoulder(checkMensurationEntry(halfShoulderEditText.getText().toString()));
-                    newProfile.setShoulderWidth(checkMensurationEntry(shoulderWidthEditText.getText().toString()));
-                    newProfile.setArmLength(checkMensurationEntry(armLengthEditText.getText().toString()));
-                    newProfile.setBiceps(checkMensurationEntry(bicepsEditText.getText().toString()));
-                    newProfile.setWrist(checkMensurationEntry(wristEditText.getText().toString()));
-                    newProfile.setInseam(checkMensurationEntry(inseamEditText.getText().toString()));
-                    newProfile.setCoatSleeveLength(checkMensurationEntry(coatSleeveLengthEditText.getText().toString()));
-                    newProfile.setJacketLength(checkMensurationEntry(jacketLengthEditText.getText().toString()));
-                    newProfile.setThigh(checkMensurationEntry(thighEditText.getText().toString()));
-                    newProfile.setAboveKnee(checkMensurationEntry(aboveKneeEditText.getText().toString()));
-                    newProfile.setBelowKnee(checkMensurationEntry(belowKneeEditText.getText().toString()));
-                    newProfile.setCalf(checkMensurationEntry(calfEditText.getText().toString()));
-                    newProfile.setAnkle(checkMensurationEntry(ankleEditText.getText().toString()));
-                    newProfile.setCrotchToKnee(checkMensurationEntry(crotchToKneeEditText.getText().toString()));
-                    newProfile.setKneeToCalf(checkMensurationEntry(neckEditText.getText().toString()));
-                    newProfile.setCalfToAnkle(checkMensurationEntry(calfToAnkleEditText.getText().toString()));
-                    newProfile.setWaistToAnkle(checkMensurationEntry(waistToAnkleEditText.getText().toString()));
-
                     if(editMode) {
-                        updateProfile(newProfile);
+                        updateProfile();
                         Toast.makeText(getApplicationContext(), "Profile updated successfully!", Toast.LENGTH_LONG).show();
                     }
                     else {
-                        saveProfile(newProfile);
+                        saveProfile();
                         Toast.makeText(getApplicationContext(), "Profile saved successfully!", Toast.LENGTH_LONG).show();
                     }
                     finish();
@@ -96,28 +73,72 @@ public class CreateProfileActivity extends AppCompatActivity {
 //        setSupportActionBar(createProfileToolbar);
     }
 
+    private void initProfileInfos(Profile newProfile) {
+        newProfile.setName(nameEditText.getText().toString());
+        newProfile.setSexe(sexSpinner.getSelectedItem().toString().substring(0, 1));
+        newProfile.setPhone(phoneEditText.getText().toString());
+        newProfile.setNeck(checkMensurationEntry(neckEditText.getText().toString()));
+        newProfile.setChest(checkMensurationEntry(chestEditText.getText().toString()));
+        newProfile.setWaist(checkMensurationEntry(waistEditText.getText().toString()));
+        newProfile.setHip(checkMensurationEntry(hipEditText.getText().toString()));
+        newProfile.setSeat(checkMensurationEntry(seatEditText.getText().toString()));
+        newProfile.setShirtLength(checkMensurationEntry(shirtLengthEditText.getText().toString()));
+        newProfile.setHalfShoulder(checkMensurationEntry(halfShoulderEditText.getText().toString()));
+        newProfile.setShoulderWidth(checkMensurationEntry(shoulderWidthEditText.getText().toString()));
+        newProfile.setArmLength(checkMensurationEntry(armLengthEditText.getText().toString()));
+        newProfile.setBiceps(checkMensurationEntry(bicepsEditText.getText().toString()));
+        newProfile.setWrist(checkMensurationEntry(wristEditText.getText().toString()));
+        newProfile.setInseam(checkMensurationEntry(inseamEditText.getText().toString()));
+        newProfile.setCoatSleeveLength(checkMensurationEntry(coatSleeveLengthEditText.getText().toString()));
+        newProfile.setJacketLength(checkMensurationEntry(jacketLengthEditText.getText().toString()));
+        newProfile.setThigh(checkMensurationEntry(thighEditText.getText().toString()));
+        newProfile.setAboveKnee(checkMensurationEntry(aboveKneeEditText.getText().toString()));
+        newProfile.setBelowKnee(checkMensurationEntry(belowKneeEditText.getText().toString()));
+        newProfile.setCalf(checkMensurationEntry(calfEditText.getText().toString()));
+        newProfile.setAnkle(checkMensurationEntry(ankleEditText.getText().toString()));
+        newProfile.setCrotchToKnee(checkMensurationEntry(crotchToKneeEditText.getText().toString()));
+        newProfile.setKneeToCalf(checkMensurationEntry(neckEditText.getText().toString()));
+        newProfile.setCalfToAnkle(checkMensurationEntry(calfToAnkleEditText.getText().toString()));
+        newProfile.setWaistToAnkle(checkMensurationEntry(waistToAnkleEditText.getText().toString()));
+    }
+
     private float checkMensurationEntry(String entry) {
         return (entry.equals(""))? 0 : Float.parseFloat(entry);
     }
 
-    public void saveProfile(final Profile profile) {
+    public void saveProfile() {
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
+                final Profile newProfile = new Profile();
                 final Date currentDate = new Date();
-                profile.setDateRecord(currentDate);
-                mDB.profileDao().insertProfile(profile);
+                initProfileInfos(newProfile);
+                newProfile.setDateRecord(currentDate);
+                mDB.profileDao().insertProfile(newProfile);
             }
         });
     }
 
-    public void updateProfile(final Profile profile) {
+    public void updateProfile() {
         AppExecutors.getInstance().diskIO().execute(new Runnable() {
             @Override
             public void run() {
-                mDB.profileDao().updateProfile(profile);
+                ArrayList<Profile> list = (ArrayList) mDB.profileDao().loadAllProfiles();
+                for (Profile p : list) {
+                    if(p.getName().equals(targetProfile.getName()))
+                        targetProfile = p;
+                }
+                initProfileInfos(targetProfile);
+                mDB.profileDao().updateProfile(targetProfile);
+                resetTargetProfile(targetProfile);
             }
         });
+    }
+
+    private void resetTargetProfile(Profile targetProfile) {
+        Intent openDetailView = new Intent(getApplicationContext(), ProfileDetailActivity.class);
+        ProfileDetailActivity.mProfile = targetProfile;
+        startActivity(openDetailView);
     }
 
     public void initViews() {
@@ -151,34 +172,32 @@ public class CreateProfileActivity extends AppCompatActivity {
     }
 
     private void populateViews() {
-        Profile p = ProfileDetailActivity.mProfile;
-
-        nameEditText.setText(p.getName());
-        phoneEditText.setText(p.getPhone());
-        if(p.getSexe().equals("F")) sexSpinner.setSelection(0);
+        nameEditText.setText(targetProfile.getName());
+        phoneEditText.setText(targetProfile.getPhone());
+        if(targetProfile.getSexe().equals("F")) sexSpinner.setSelection(0);
         else sexSpinner.setSelection(1);
-        neckEditText.setText(String.valueOf(p.getNeck()));
-        chestEditText.setText(String.valueOf(p.getChest()));
-        waistEditText.setText(String.valueOf(p.getWaist()));
-        hipEditText.setText(String.valueOf(p.getHip()));
-        seatEditText.setText(String.valueOf(p.getSeat()));
-        shirtLengthEditText.setText(String.valueOf(p.getShirtLength()));
-        halfShoulderEditText.setText(String.valueOf(p.getHalfShoulder()));
-        shoulderWidthEditText.setText(String.valueOf(p.getShoulderWidth()));
-        armLengthEditText.setText(String.valueOf(p.getArmLength()));
-        bicepsEditText.setText(String.valueOf(p.getBiceps()));
-        wristEditText.setText(String.valueOf(p.getWrist()));
-        inseamEditText.setText(String.valueOf(p.getInseam()));
-        coatSleeveLengthEditText.setText(String.valueOf(p.getCoatSleeveLength()));
-        jacketLengthEditText.setText(String.valueOf(p.getJacketLength()));
-        thighEditText.setText(String.valueOf(p.getThigh()));
-        aboveKneeEditText.setText(String.valueOf(p.getAboveKnee()));
-        belowKneeEditText.setText(String.valueOf(p.getBelowKnee()));
-        calfEditText.setText(String.valueOf(p.getCalf()));
-        ankleEditText.setText(String.valueOf(p.getAnkle()));
-        crotchToKneeEditText.setText(String.valueOf(p.getCrotchToKnee()));
-        kneeToCalfEditText.setText(String.valueOf(p.getKneeToCalf()));
-        calfToAnkleEditText.setText(String.valueOf(p.getCalfToAnkle()));
-        waistToAnkleEditText.setText(String.valueOf(p.getWaistToAnkle()));
+        neckEditText.setText(String.valueOf(targetProfile.getNeck()));
+        chestEditText.setText(String.valueOf(targetProfile.getChest()));
+        waistEditText.setText(String.valueOf(targetProfile.getWaist()));
+        hipEditText.setText(String.valueOf(targetProfile.getHip()));
+        seatEditText.setText(String.valueOf(targetProfile.getSeat()));
+        shirtLengthEditText.setText(String.valueOf(targetProfile.getShirtLength()));
+        halfShoulderEditText.setText(String.valueOf(targetProfile.getHalfShoulder()));
+        shoulderWidthEditText.setText(String.valueOf(targetProfile.getShoulderWidth()));
+        armLengthEditText.setText(String.valueOf(targetProfile.getArmLength()));
+        bicepsEditText.setText(String.valueOf(targetProfile.getBiceps()));
+        wristEditText.setText(String.valueOf(targetProfile.getWrist()));
+        inseamEditText.setText(String.valueOf(targetProfile.getInseam()));
+        coatSleeveLengthEditText.setText(String.valueOf(targetProfile.getCoatSleeveLength()));
+        jacketLengthEditText.setText(String.valueOf(targetProfile.getJacketLength()));
+        thighEditText.setText(String.valueOf(targetProfile.getThigh()));
+        aboveKneeEditText.setText(String.valueOf(targetProfile.getAboveKnee()));
+        belowKneeEditText.setText(String.valueOf(targetProfile.getBelowKnee()));
+        calfEditText.setText(String.valueOf(targetProfile.getCalf()));
+        ankleEditText.setText(String.valueOf(targetProfile.getAnkle()));
+        crotchToKneeEditText.setText(String.valueOf(targetProfile.getCrotchToKnee()));
+        kneeToCalfEditText.setText(String.valueOf(targetProfile.getKneeToCalf()));
+        calfToAnkleEditText.setText(String.valueOf(targetProfile.getCalfToAnkle()));
+        waistToAnkleEditText.setText(String.valueOf(targetProfile.getWaistToAnkle()));
     }
 }

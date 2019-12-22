@@ -91,5 +91,6 @@ public class ProfileDetailActivity extends AppCompatActivity {
         Intent gotoEditActivity = new Intent(getApplicationContext(), CreateProfileActivity.class);
         gotoEditActivity.putExtra(CreateProfileActivity.EDIT_MODE, true);
         startActivity(gotoEditActivity);
+        finish();
     }
 }
