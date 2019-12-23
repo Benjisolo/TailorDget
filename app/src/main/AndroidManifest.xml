@@ -12,7 +12,7 @@
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
         <!-- Main Activity -->
-        <activity android:name=".MainActivity">
+        <activity android:name="com.projects.tailordget.activities.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,10 +20,10 @@
             </intent-filter>
         </activity> <!-- Create Profile Activity -->
         <activity
-            android:name=".CreateProfileActivity"
+            android:name="com.projects.tailordget.activities.CreateProfileActivity"
             android:theme="@style/AppThemeNoActionBar" /> <!-- Profile Details Activity -->
         <activity
-            android:name=".ProfileDetailActivity"
+            android:name="com.projects.tailordget.activities.ProfileDetailActivity"
             android:theme="@style/AppThemeNoActionBar" />
     </application>
 
