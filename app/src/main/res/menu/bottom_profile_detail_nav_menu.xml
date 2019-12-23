@@ -3,7 +3,7 @@
 
     <item
         android:id="@+id/mennuMensuration"
-        android:title="@string/mensuration_title"
+        android:title="@string/measurements_title"
         android:icon="@drawable/ic_ruler"/>
     <item
         android:id="@+id/menuCommands"

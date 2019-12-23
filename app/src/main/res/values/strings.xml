@@ -25,7 +25,7 @@
     <string name="item_delete">Delete</string>
     <string name="cab_selected">%1$d selected</string>
     <string name="favorite">Favorite</string>
-    <string name="mensuration_title">Mensuration</string>
+    <string name="measurements_title">Measurements</string>
     <string name="commands_title">Commands</string>
     <string name="oversee_title">Oversee</string>
     <string name="label_neck">Neck</string>

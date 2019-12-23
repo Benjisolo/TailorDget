@@ -157,7 +157,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:padding="10dp"
-                        android:text="@string/mensuration_title"
+                        android:text="@string/measurements_title"
                         android:textColor="@color/colorPrimary"
                         android:textSize="18sp" />
 

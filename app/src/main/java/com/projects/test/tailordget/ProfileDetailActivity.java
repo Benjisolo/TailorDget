@@ -27,7 +27,7 @@ public class ProfileDetailActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch (menuItem.getItemId()) {
                 case R.id.mennuMensuration:
-                    replaceFragment(new FragmentProfileMensuration());
+                    replaceFragment(new FragmentProfileMeasurements());
                     return true;
                 case R.id.menuCommands:
                     replaceFragment(new FragmentProfileCommands());
@@ -64,7 +64,7 @@ public class ProfileDetailActivity extends AppCompatActivity {
             }
         });
 
-        replaceFragment(new FragmentProfileMensuration());
+        replaceFragment(new FragmentProfileMeasurements());
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.profileDetailBottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
