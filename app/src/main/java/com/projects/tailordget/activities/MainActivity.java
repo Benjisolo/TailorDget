@@ -12,7 +12,7 @@ import android.view.MenuItem;
 import com.projects.tailordget.fragments.FragmentAllProfiles;
 import com.projects.tailordget.fragments.FragmentFavoritesProfiles;
 import com.projects.test.tailordget.R;
-import com.projects.tailordget.utilities.ViewPagerAdapter;
+import com.projects.tailordget.adapters.ViewPagerAdapter;
 
 public class MainActivity extends AppCompatActivity {
     private Toolbar toolbar;

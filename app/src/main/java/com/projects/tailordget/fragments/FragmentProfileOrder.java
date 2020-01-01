@@ -8,12 +8,12 @@ import android.view.ViewGroup;
 
 import com.projects.test.tailordget.R;
 
-public class FragmentProfileCommands extends Fragment {
+public class FragmentProfileOrder extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_profile_commands, container, false);
+        return inflater.inflate(R.layout.fragment_profile_order, container, false);
     }
 
 }

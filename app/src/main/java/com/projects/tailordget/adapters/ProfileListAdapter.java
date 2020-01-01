@@ -1,4 +1,4 @@
-package com.projects.tailordget.utilities;
+package com.projects.tailordget.adapters;
 
 import android.content.Context;
 import android.support.v7.view.ActionMode;
@@ -49,7 +49,7 @@ public class ProfileListAdapter extends RecyclerView.Adapter<ProfileListAdapter.
     public ProfileViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         // Inflate the task_layout to a view
         View view = LayoutInflater.from(mContext)
-                .inflate(R.layout.profile_list_layout, parent, false);
+                .inflate(R.layout.view_profile_list, parent, false);
 
         return new ProfileViewHolder(view);
     }

@@ -6,8 +6,8 @@
         android:title="@string/measurements_title"
         android:icon="@drawable/ic_ruler"/>
     <item
-        android:id="@+id/menuCommands"
-        android:title="@string/commands_title"
+        android:id="@+id/menuOrders"
+        android:title="@string/label_orders"
         android:icon="@drawable/ic_dollar"/>
     <item
         android:id="@+id/menuOversee"

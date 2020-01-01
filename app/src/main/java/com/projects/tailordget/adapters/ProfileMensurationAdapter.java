@@ -1,4 +1,4 @@
-package com.projects.tailordget.utilities;
+package com.projects.tailordget.adapters;
 
 import android.content.Context;
 import android.support.annotation.NonNull;
@@ -22,7 +22,7 @@ public class ProfileMensurationAdapter extends RecyclerView.Adapter<ProfileMensu
     @Override
     public MensurationViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(mContext)
-                .inflate(R.layout.profile_list_layout, viewGroup, false);
+                .inflate(R.layout.view_profile_list, viewGroup, false);
 
         return new MensurationViewHolder(view);
     }

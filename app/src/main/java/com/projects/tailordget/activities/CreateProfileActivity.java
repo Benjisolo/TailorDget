@@ -51,7 +51,7 @@ public class CreateProfileActivity extends AppCompatActivity {
             populateViews();
         }
 
-        createProfileToolbar.inflateMenu(R.menu.create_profile_toolbar_menu);
+        createProfileToolbar.inflateMenu(R.menu.save_menu);
         createProfileToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem menuItem) {
@@ -147,7 +147,7 @@ public class CreateProfileActivity extends AppCompatActivity {
     }
 
     public void initViews() {
-        createProfileToolbar = (Toolbar) findViewById(R.id.createProfileToolbar);
+        createProfileToolbar = (Toolbar) findViewById(R.id.newOrderToolbar);
         nameEditText = (EditText) findViewById(R.id.nameEditText);
         sexSpinner = (Spinner) findViewById(R.id.sexSpinner);
         phoneEditText = (EditText) findViewById(R.id.phoneEditText);

@@ -18,13 +18,16 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity> <!-- Create Profile Activity -->
+        </activity>
         <activity
             android:name="com.projects.tailordget.activities.CreateProfileActivity"
-            android:theme="@style/AppThemeNoActionBar" /> <!-- Profile Details Activity -->
+            android:theme="@style/AppThemeNoActionBar" />
         <activity
             android:name="com.projects.tailordget.activities.ProfileDetailActivity"
             android:theme="@style/AppThemeNoActionBar" />
+        <activity
+            android:name="com.projects.tailordget.activities.NewOrder"
+            android:theme="@style/AppThemeNoActionBar"/>
     </application>
 
 </manifest>

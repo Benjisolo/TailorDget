@@ -14,7 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
-import com.projects.tailordget.fragments.FragmentProfileCommands;
+import com.projects.tailordget.fragments.FragmentProfileOrder;
 import com.projects.tailordget.fragments.FragmentProfileMeasurements;
 import com.projects.tailordget.fragments.FragmentProfileOversee;
 import com.projects.tailordget.datas.Profile;
@@ -24,6 +24,13 @@ public class ProfileDetailActivity extends AppCompatActivity {
 
     public static Profile mProfile;
 
+    enum FragmentMode {
+        MEASUREMENT,
+        ORDERS,
+        OVERSEE
+    }
+    private FragmentMode fragmentMode;
+
     private Toolbar profileViewToolbar;
     private CollapsingToolbarLayout profileViewCollapsingTB;
     private FloatingActionButton editFab;
@@ -32,14 +39,22 @@ public class ProfileDetailActivity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
             switch (menuItem.getItemId()) {
-                case R.id.mennuMensuration:
-                    replaceFragment(new FragmentProfileMeasurements());
+                case R.id.mennuMensuration: {
+                        replaceFragment(new FragmentProfileMeasurements());
+                        editFab.setImageResource(R.drawable.ic_edit);
+                        fragmentMode = FragmentMode.MEASUREMENT;
+                    }
                     return true;
-                case R.id.menuCommands:
-                    replaceFragment(new FragmentProfileCommands());
+                case R.id.menuOrders: {
+                        replaceFragment(new FragmentProfileOrder());
+                        editFab.setImageResource(R.drawable.ic_add);
+                        fragmentMode = FragmentMode.ORDERS;
+                    }
                     return true;
-                case R.id.menuOversee:
-                    replaceFragment(new FragmentProfileOversee());
+                case R.id.menuOversee: {
+                        replaceFragment(new FragmentProfileOversee());
+                        fragmentMode = FragmentMode.OVERSEE;
+                    }
                     return true;
             }
             return true;
@@ -63,10 +78,17 @@ public class ProfileDetailActivity extends AppCompatActivity {
 
         profileViewCollapsingTB.setTitle(mProfile.getName());
 
+        fragmentMode = FragmentMode.MEASUREMENT;
+
         editFab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                openEditActivity();
+                if(fragmentMode == FragmentMode.MEASUREMENT) {
+                    openEditActivity();
+                }
+                if(fragmentMode == FragmentMode.ORDERS) {
+                    openNewOrderActivity();
+                }
             }
         });
 
@@ -74,6 +96,11 @@ public class ProfileDetailActivity extends AppCompatActivity {
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.profileDetailBottomNav);
         bottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
+    }
+
+    private void openNewOrderActivity() {
+        Intent intent = new Intent(getApplicationContext(), NewOrder.class);
+        startActivity(intent);
     }
 
     private void initViews() {
@@ -97,6 +124,6 @@ public class ProfileDetailActivity extends AppCompatActivity {
         Intent gotoEditActivity = new Intent(getApplicationContext(), CreateProfileActivity.class);
         gotoEditActivity.putExtra(CreateProfileActivity.EDIT_MODE, true);
         startActivity(gotoEditActivity);
-        finish();
+//        finish();
     }
 }

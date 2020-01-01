@@ -4,6 +4,7 @@ import android.support.v7.view.ActionMode;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.projects.tailordget.adapters.ProfileListAdapter;
 import com.projects.tailordget.interfaces.ActionModeViewCallbacks;
 import com.projects.test.tailordget.R;
 

@@ -7,10 +7,11 @@ import android.arch.persistence.room.TypeConverters;
 import android.content.Context;
 import android.util.Log;
 
-import com.projects.tailordget.utilities.DateConverter;
+import com.projects.tailordget.interfaces.OrderDAO;
 import com.projects.tailordget.interfaces.ProfileDao;
+import com.projects.tailordget.utilities.DateConverter;
 
-@Database(entities = {Profile.class}, version = 1, exportSchema = false)
+@Database(entities = {Profile.class, Order.class}, version = 1, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -36,5 +37,6 @@ public abstract class AppDatabase extends RoomDatabase {
     }
 
     public abstract ProfileDao profileDao();
+    public abstract OrderDAO orderDao();
 
 }

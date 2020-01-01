@@ -8,7 +8,7 @@
     tools:context="com.projects.tailordget.activities.CreateProfileActivity">
 
     <android.support.v7.widget.Toolbar
-        android:id="@+id/createProfileToolbar"
+        android:id="@+id/newOrderToolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="?attr/colorPrimary"

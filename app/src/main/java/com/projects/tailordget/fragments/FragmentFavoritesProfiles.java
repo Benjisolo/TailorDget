@@ -31,7 +31,7 @@ public class FragmentFavoritesProfiles extends Fragment {
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.favorites_profiles_fragment, container, false);
+        final View view = inflater.inflate(R.layout.fragment_favorites_profiles, container, false);
 
         mDb = AppDatabase.getInstance(view.getContext());
         favoriteProfileList = new ArrayList<>();
@@ -79,7 +79,7 @@ public class FragmentFavoritesProfiles extends Fragment {
 
     public void addFavoriteView(final LinearLayout wrapper, final String name, String phone) {
         inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        final View v = inflater.inflate(R.layout.favorite_list_layout, null);
+        final View v = inflater.inflate(R.layout.view_favorite_list, null);
         Toolbar tooblar = (Toolbar) v.findViewById(R.id.toolbar);
         tooblar.inflateMenu(R.menu.favorite_menu);
         tooblar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {

@@ -67,7 +67,7 @@ public class FragmentProfileMeasurements extends Fragment {
     }
 
     public void addCardView(LinearLayout wrapper, String label, String value) {
-        View v = measurementInflater.inflate(R.layout.measurement_card_view, null);
+        View v = measurementInflater.inflate(R.layout.view_measurement_card, null);
         ((TextView) v.findViewById(R.id.measurementLabel)).setText(label);
         ((TextView) v.findViewById(R.id.measurementValue)).setText(value);
         wrapper.addView(v);

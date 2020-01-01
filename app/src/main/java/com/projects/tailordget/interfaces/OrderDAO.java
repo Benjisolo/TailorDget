@@ -7,25 +7,25 @@ import android.arch.persistence.room.OnConflictStrategy;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
 
-import com.projects.tailordget.datas.Command;
+import com.projects.tailordget.datas.Order;
 
 import java.util.List;
 
 @Dao
-public interface CommandDAO {
+public interface OrderDAO {
 
-    @Query("SELECT * FROM command ORDER BY id DESC")
-    List<Command> loadAllCommands();
+    @Query("SELECT * FROM `order` ORDER BY id DESC")
+    List<Order> loadAllOrders();
 
     @Insert
-    void insertCommand(Command command);
+    void insertOrder(Order order);
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    void updateCommand(Command command);
+    void updateOrder(Order order);
 
     @Delete
-    void deleteCommand(Command command);
+    void deleteOrder(Order order);
 
-    @Query("SELECT * FROM command WHERE id = :id")
-    Command loadCommandById(int id);
+    @Query("SELECT * FROM `order` WHERE id = :id")
+    Order loadOrderById(int id);
 }

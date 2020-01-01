@@ -8,17 +8,17 @@ import android.arch.persistence.room.PrimaryKey;
 import java.util.Date;
 
 @Entity
-public class Command {
+public class Order {
 
     @PrimaryKey(autoGenerate = true)
     private int id;
     private String title;
-    private Profile profile;
-    private Type type;
+    private Integer profile;
+    private Integer type;
     private float price;
     private String details;
     private String images;
-    private Status status;
+    private Integer status;
     @ColumnInfo(name = "date_record")
     private Date dateRecord;
     @ColumnInfo(name = "date_delivery")
@@ -26,7 +26,7 @@ public class Command {
     @ColumnInfo(name = "date_update")
     private Date dateUpdate;
 
-    public Command(int id, String title, Profile profile, Type type) {
+    public Order(int id, String title, Integer profile, Integer type) {
         this.id = id;
         this.title = title;
         this.profile = profile;
@@ -34,11 +34,11 @@ public class Command {
     }
 
     @Ignore
-    public Command() {
+    public Order() {
     }
 
     @Ignore
-    public Command(String title, Profile profile, Type type) {
+    public Order(String title, Integer profile, Integer type) {
         this.title = title;
         this.profile = profile;
         this.type = type;
@@ -60,19 +60,19 @@ public class Command {
         this.title = title;
     }
 
-    public Profile getProfile() {
+    public Integer getProfile() {
         return profile;
     }
 
-    public void setProfile(Profile profile) {
+    public void setProfile(Integer profile) {
         this.profile = profile;
     }
 
-    public Type getType() {
+    public Integer getType() {
         return type;
     }
 
-    public void setType(Type type) {
+    public void setType(Integer type) {
         this.type = type;
     }
 
@@ -100,11 +100,11 @@ public class Command {
         this.images = images;
     }
 
-    public Status getStatus() {
+    public Integer getStatus() {
         return status;
     }
 
-    public void setStatus(Status status) {
+    public void setStatus(Integer status) {
         this.status = status;
     }
 
@@ -134,7 +134,7 @@ public class Command {
 
     @Override
     public String toString() {
-        return "Command{" +
+        return "Order{" +
                 "id=" + id +
                 ", title='" + title + '\'' +
                 ", profile=" + profile +

@@ -1,9 +1,23 @@
 <resources>
 
     <!--Arrays-->
+    <array name="defaultItem">
+        <item>-- Choose --</item>
+    </array>
     <array name="genderListItems">
         <item>Female</item>
         <item>Male</item>
+    </array>
+    <array name="orderTypeItems">
+        <item>Shirt</item>
+        <item>T-shirt</item>
+        <item>Tunic</item>
+        <item>Pants</item>
+    </array>
+    <array name="statusItems">
+        <item>Pending</item>
+        <item>Complete</item>
+        <item>Delivered</item>
     </array>
 
     <!--Strings-->
@@ -17,7 +31,7 @@
     <string name="all_profile_title_pane">All</string>
     <string name="favorite_profile_title_pane">Favorites</string>
     <string name="new_profile_view_title">New Profile</string>
-    <string name="profileActivityTitle">Profiles</string>
+    <string name="label_profile">Profile</string>
     <string name="name_label">Name</string>
     <string name="sex_label">Sex</string>
     <string name="profile_name_label">Profile Name</string>
@@ -26,7 +40,6 @@
     <string name="cab_selected">%1$d selected</string>
     <string name="favorite">Favorite</string>
     <string name="measurements_title">Measurements</string>
-    <string name="commands_title">Commands</string>
     <string name="oversee_title">Oversee</string>
     <string name="label_neck">Neck</string>
     <string name="label_chest">Chest</string>
@@ -62,4 +75,13 @@
     <string name="added_to_favorite_message">Added to Favorites</string>
     <string name="remove_label">Remove</string>
     <string name="item_edit">Edit</string>
+    <string name="new_order_view_title">New Order</string>
+    <string name="label_informations">Informations</string>
+    <string name="image_label">Image(s)</string>
+    <string name="type_label">Type</string>
+    <string name="label_order">Order</string>
+    <string name="label_orders">Orders</string>
+    <string name="label_price">Price</string>
+    <string name="label_details">Details</string>
+    <string name="label_status">Status</string>
 </resources>

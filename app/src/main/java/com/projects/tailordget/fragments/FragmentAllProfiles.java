@@ -23,7 +23,7 @@ import com.projects.tailordget.utilities.AppExecutors;
 import com.projects.tailordget.interfaces.ListProfileActionModeViewCallbacks;
 import com.projects.tailordget.utilities.ListProfileToolbarActionModeCallback;
 import com.projects.tailordget.datas.Profile;
-import com.projects.tailordget.utilities.ProfileListAdapter;
+import com.projects.tailordget.adapters.ProfileListAdapter;
 import com.projects.test.tailordget.R;
 
 import java.util.ArrayList;
@@ -51,7 +51,7 @@ public class FragmentAllProfiles extends Fragment
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.all_profiles_fragment, container, false);
+        final View view = inflater.inflate(R.layout.fragment_all_profiles, container, false);
 
         newProfileActBtn = (FloatingActionButton) view.findViewById(R.id.newProfileFloatingActBtn);
         newProfileActBtn.setOnClickListener(new View.OnClickListener() {
