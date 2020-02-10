@@ -28,4 +28,7 @@ public interface TypeDAO {
 
     @Query("SELECT * FROM type WHERE id = :id")
     Type loadTypeById(int id);
+
+    @Query("DELETE FROM type")
+    void deleteAllType();
 }

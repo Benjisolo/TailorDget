@@ -1,12 +1,12 @@
 package com.projects.tailordget.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -15,6 +15,8 @@ import android.widget.Toast;
 import com.projects.tailordget.datas.AppDatabase;
 import com.projects.tailordget.datas.Order;
 import com.projects.tailordget.datas.Profile;
+import com.projects.tailordget.datas.Status;
+import com.projects.tailordget.datas.Type;
 import com.projects.tailordget.utilities.AppExecutors;
 import com.projects.test.tailordget.R;
 
@@ -22,20 +24,26 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class NewOrder extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class NewOrder extends AppCompatActivity {
 
     public static final String EDIT_MODE = "editMode";
 
     private static final String LOG_TAG = NewOrder.class.getSimpleName();
     private Toolbar newOrderToolbar;
     private static AppDatabase mDB;
-    private ArrayAdapter<String> arrayAdapter;
+    private ArrayAdapter<String> profileArrayAdapter;
+    private ArrayAdapter<String> typeArrayAdapter;
+    private ArrayAdapter<String> statusArrayAdapter;
     private List<Profile> profileList;
+    private List<Order> orderList;
+    private List<Type> typeList;
+    private List<Status> statusList;
     private List<String> profileNameList;
+    private List<String> typeNameList;
+    private List<String> statusNameList;
     private EditText nameEditText, priceEditText, detailsEditText;
     private Spinner typeSpinner, profileSpinner, statusSpinner;
 
-    private List<Order> orderList;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -44,7 +52,11 @@ public class NewOrder extends AppCompatActivity implements AdapterView.OnItemSel
 
         newOrderToolbar = (Toolbar) findViewById(R.id.newOrderToolbar);
         profileList = new ArrayList<>();
+        typeList = new ArrayList<>();
+        statusList = new ArrayList<>();
         profileNameList = new ArrayList<>();
+        typeNameList = new ArrayList<>();
+        statusNameList = new ArrayList<>();
         nameEditText = (EditText) findViewById(R.id.orderNameEditText);
         priceEditText = (EditText) findViewById(R.id.priceEditText);
         detailsEditText = (EditText) findViewById(R.id.orderDetailsEditText);
@@ -54,6 +66,8 @@ public class NewOrder extends AppCompatActivity implements AdapterView.OnItemSel
         mDB = AppDatabase.getInstance(getApplicationContext());
 
         getProfilesData();
+        getTypeOrderData();
+        getStatusOrderData();
 
         Bundle extraData = getIntent().getExtras();
 //        final boolean editMode = (boolean)extraData.get(EDIT_MODE);
@@ -70,7 +84,9 @@ public class NewOrder extends AppCompatActivity implements AdapterView.OnItemSel
                         saveOrder();
                         Toast.makeText(getApplicationContext(), "Order saved successfully!", Toast.LENGTH_LONG).show();
 //                    }
-//                    finish();
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
                 return true;
             }
@@ -81,16 +97,66 @@ public class NewOrder extends AppCompatActivity implements AdapterView.OnItemSel
                 finish();
             }
         });
+        // Saving the Defaults spinners values
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                saveDefaultTypes();
+                saveDefaultStatus();
+            }
+        });
+        populateProfileSpinner();
+        populateTypeSpinner();
+        populateStatusSpinner();
+    }
 
+    private void saveDefaultStatus() {
+//        mDB.statusDao().deleteAllStatus();
+        mDB.statusDao().insertStatus(new Status("Pending"));
+        mDB.statusDao().insertStatus(new Status("Complete"));
+        mDB.statusDao().insertStatus(new Status("Delivered"));
+    }
+
+    private void saveDefaultTypes() {
+//        mDB.typeDao().deleteAllType();
+        mDB.typeDao().insertType(new Type("Shirt"));
+        mDB.typeDao().insertType(new Type("T-Shirt"));
+        mDB.typeDao().insertType(new Type("Tunic"));
+        mDB.typeDao().insertType(new Type("Pants"));
+    }
+
+    private void populateProfileSpinner() {
         for(Profile p : profileList) {
             profileNameList.add(p.getName());
         }
-
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, profileNameList);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        profileArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, profileNameList);
+        profileArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         profileSpinner = (Spinner) findViewById(R.id.profileOrderingSpinner);
-        profileSpinner.setAdapter(arrayAdapter);
+        profileSpinner.setAdapter(profileArrayAdapter);
+    }
+
+    private void populateTypeSpinner() {
+        for (Type t : typeList) {
+            typeNameList.add(t.getName());
+        }
+        typeArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, typeNameList);
+        typeArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        typeSpinner = (Spinner) findViewById(R.id.orderTypeSpinner);
+        typeSpinner.setAdapter(typeArrayAdapter);
+    }
+
+    private void populateStatusSpinner() {
+        for(Status s : statusList) {
+            statusNameList.add(s.getName());
+        }
+
+        statusArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, statusNameList);
+        statusArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+        statusSpinner = (Spinner) findViewById(R.id.orderStatusSpinner);
+        statusSpinner.setAdapter(statusArrayAdapter);
     }
 
     public void saveOrder() {
@@ -108,13 +174,21 @@ public class NewOrder extends AppCompatActivity implements AdapterView.OnItemSel
 
     private void initOrderInformations(Order newOrder, Date dateUpdate) {
         newOrder.setTitle(nameEditText.getText().toString());
-        newOrder.setType(Integer.valueOf(typeSpinner.getSelectedItem().toString()));
+        for(Type t : typeList) {
+            if(t.getName().equals(typeSpinner.getSelectedItem().toString())) {
+                newOrder.setType(t.getId());
+            }
+        }
         for(Profile p : profileList) {
             if(p.getName().equals(profileSpinner.getSelectedItem().toString())) {
                 newOrder.setProfile(p.getId());
             }
         }
-        newOrder.setStatus(Integer.valueOf(statusSpinner.getSelectedItem().toString()));
+        for(Status s : statusList) {
+            if(s.getName().equals(statusSpinner.getSelectedItem().toString())) {
+                newOrder.setType(s.getId());
+            }
+        }
         newOrder.setPrice(Float.valueOf(priceEditText.getText().toString()));
         newOrder.setDetails(detailsEditText.getText().toString());
         newOrder.setDateUpdate(dateUpdate);
@@ -125,6 +199,24 @@ public class NewOrder extends AppCompatActivity implements AdapterView.OnItemSel
             @Override
             public void run() {
                 profileList = mDB.profileDao().loadAllProfiles();
+            }
+        });
+    }
+
+    public void getTypeOrderData() {
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                typeList = mDB.typeDao().loadAllTypes();
+            }
+        });
+    }
+
+    public void getStatusOrderData() {
+        AppExecutors.getInstance().diskIO().execute(new Runnable() {
+            @Override
+            public void run() {
+                statusList = mDB.statusDao().loadAllStatus();
             }
         });
     }
@@ -142,14 +234,15 @@ public class NewOrder extends AppCompatActivity implements AdapterView.OnItemSel
         this.profileNameList = profileNameList;
     }
 
-    @Override
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        Toast.makeText(parent.getContext(), parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
-        System.out.println("=======================");
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
-    }
+//Verifying the OnItemSelectedListener
+//    @Override
+//    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+//        Toast.makeText(parent.getContext(), parent.getItemAtPosition(position).toString(), Toast.LENGTH_SHORT).show();
+//        System.out.println("=======================");
+//    }
+//
+//    @Override
+//    public void onNothingSelected(AdapterView<?> parent) {
+//
+//    }
 }

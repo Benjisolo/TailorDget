@@ -15,7 +15,7 @@ import java.util.List;
 public interface StatusDAO {
 
     @Query("SELECT * FROM status ORDER BY id DESC")
-    List<Status> loadAllStatuss();
+    List<Status> loadAllStatus();
 
     @Insert
     void insertStatus(Status status);
@@ -28,4 +28,7 @@ public interface StatusDAO {
 
     @Query("SELECT * FROM status WHERE id = :id")
     Status loadStatusById(int id);
+
+    @Query("DELETE FROM status")
+    void deleteAllStatus();
 }

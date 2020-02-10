@@ -25,7 +25,7 @@
     <string name="home_label">Home</string>
     <string name="profiles_label">Profiles</string>
     <string name="task_label">Task</string>
-    <string name="settings_label">Settings</string>
+    <string name="label_settings">Settings</string>
     <string name="all_profiles_list">All Profiles List</string>
     <string name="favorites_profiles_list">Favorites Profiles List</string>
     <string name="all_profile_title_pane">All</string>

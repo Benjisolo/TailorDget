@@ -9,9 +9,11 @@ import android.util.Log;
 
 import com.projects.tailordget.interfaces.OrderDAO;
 import com.projects.tailordget.interfaces.ProfileDao;
+import com.projects.tailordget.interfaces.StatusDAO;
+import com.projects.tailordget.interfaces.TypeDAO;
 import com.projects.tailordget.utilities.DateConverter;
 
-@Database(entities = {Profile.class, Order.class}, version = 1, exportSchema = false)
+@Database(entities = {Profile.class, Order.class, Type.class, Status.class}, version = 1, exportSchema = false)
 @TypeConverters(DateConverter.class)
 public abstract class AppDatabase extends RoomDatabase {
 
@@ -38,5 +40,6 @@ public abstract class AppDatabase extends RoomDatabase {
 
     public abstract ProfileDao profileDao();
     public abstract OrderDAO orderDao();
-
+    public abstract TypeDAO typeDao();
+    public abstract StatusDAO statusDao();
 }
