@@ -30,7 +30,6 @@ public class FragmentModuleHome extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        Log.d(TAG, "onCreateView()");
         final View view = inflater.inflate(R.layout.fragment_module_home, container, false);
 
         mDB = AppDatabase.getInstance(getContext());
@@ -43,6 +42,7 @@ public class FragmentModuleHome extends Fragment {
 
     private void populateOrdersView(List<Order> orderList) {
         Log.d(TAG, "---------------- ITEMS "+orderList.size());
+        homeLinearLayout.removeViews(1, homeLinearLayout.getChildCount()-1);
         for(Order o : orderList) {
             addCardView(o);
         }
@@ -106,71 +106,62 @@ public class FragmentModuleHome extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Log.d(TAG, "onAttach()");
+//        Log.d(TAG, "onAttach()");
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate()");
-
+//        Log.d(TAG, "onCreate()");
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        Log.d(TAG, "onActivityCreated()");
-
+//        Log.d(TAG, "onActivityCreated()");
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        Log.d(TAG, "onStart()");
-
-        homeLinearLayout.setBackgroundColor(Color.LTGRAY);
-//        populateOrdersView();
+//        Log.d(TAG, "onStart()");
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume()");
+//        Log.d(TAG, "onResume()");
+        homeLinearLayout.setBackgroundColor(Color.LTGRAY);
         retrieveOrders();
     }
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.d(TAG, "onPause()");
-
+//        Log.d(TAG, "onPause()");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.d(TAG, "onStop()");
-
+//        Log.d(TAG, "onStop()");
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        Log.d(TAG, "onDestroyView()");
-
+//        Log.d(TAG, "onDestroyView()");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy()");
-
+//        Log.d(TAG, "onDestroy()");
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-        Log.d(TAG, "onDetach()");
-
+//        Log.d(TAG, "onDetach()");
     }
 }
